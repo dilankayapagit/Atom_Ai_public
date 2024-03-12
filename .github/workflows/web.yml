@@ -1,0 +1,43 @@
+on:
+  push:
+    branches:
+    - web
+    - dev
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+name: "Build & Release"
+
+jobs:
+  build:
+    name: Build & Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17.x'
+        cache: gradle
+
+    - uses: subosito/flutter-action@v2
+      with:
+        # flutter-version: '3.7.12'
+        channel: "stable"
+        cache: true
+
+    - run: flutter pub get
+    - run: flutter build web
+
+    - name: Firebase Deploy
+      uses: FirebaseExtended/action-hosting-deploy@v0
+      with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ATOMAI_47DDA }}'
+        channelId: live
+        projectId: atomai-47dda
+
+        

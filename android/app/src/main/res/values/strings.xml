@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name">atomai</string>
+    <!--TODO: Replace "000000000000" with your Facebook App ID here-->
+    <string name="facebook_app_id">1083969836331197</string>
+    <string name="fb_login_protocol_scheme">fb1083969836331197</string>
+    <!--TODO: Replace "YOUR_CLIENT_ACCESS_TOKEN" with your client access token here-->
+    <string name="facebook_client_token">0d8eb1a57a8ed50e1bd491aa9035d606</string>
+</resources>
